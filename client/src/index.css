@@ -51,6 +51,8 @@
   --alice-blue: hsl(208 100% 97%);
   --deep-pink: hsl(328 100% 54%);
   --turquoise: hsl(188 100% 41%);
+  --vibrant-orange: hsl(30 100% 65%);
+  --electric-blue: hsl(210 100% 60%);
 }
 
 .dark {
@@ -137,6 +139,22 @@
   
   .bg-turquoise {
     background-color: var(--turquoise);
+  }
+  
+  .bg-vibrant-orange {
+    background-color: var(--vibrant-orange);
+  }
+  
+  .bg-electric-blue {
+    background-color: var(--electric-blue);
+  }
+  
+  .text-vibrant-orange {
+    color: var(--vibrant-orange);
+  }
+  
+  .text-electric-blue {
+    color: var(--electric-blue);
   }
 }
 

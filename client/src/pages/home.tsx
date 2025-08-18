@@ -11,7 +11,7 @@ import { HelpCircle } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-soft-cream to-alice-blue">
+    <div className="min-h-screen bg-gradient-to-br from-vibrant-orange to-electric-blue">
       <Navigation />
       <HeroSection />
       <TutorialCategories />

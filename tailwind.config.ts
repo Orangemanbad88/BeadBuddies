@@ -70,6 +70,8 @@ export default {
         "alice-blue": "var(--alice-blue)",
         "deep-pink": "var(--deep-pink)",
         "turquoise": "var(--turquoise)",
+        "vibrant-orange": "var(--vibrant-orange)",
+        "electric-blue": "var(--electric-blue)",
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

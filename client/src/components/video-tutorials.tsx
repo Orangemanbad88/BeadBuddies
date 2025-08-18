@@ -21,7 +21,7 @@ export default function VideoTutorials() {
 
   if (isLoading) {
     return (
-      <section id="videos" className="py-16 bg-gradient-to-br from-alice-blue to-soft-cream">
+      <section id="videos" className="py-16 bg-gradient-to-br from-vibrant-orange/10 to-electric-blue/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="font-fredoka text-4xl md:text-5xl text-primary-pink mb-4">
@@ -53,7 +53,7 @@ export default function VideoTutorials() {
   }
 
   return (
-    <section id="videos" className="py-16 bg-gradient-to-br from-alice-blue to-soft-cream">
+    <section id="videos" className="py-16 bg-gradient-to-br from-vibrant-orange/10 to-electric-blue/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="font-fredoka text-4xl md:text-5xl text-primary-pink mb-4">

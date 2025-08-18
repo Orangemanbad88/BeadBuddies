@@ -30,7 +30,7 @@ export default function FeaturedTutorials() {
   ];
 
   return (
-    <section id="tutorials" className="py-16 bg-gradient-to-br from-soft-cream to-alice-blue">
+    <section id="tutorials" className="py-16 bg-gradient-to-br from-vibrant-orange/10 to-electric-blue/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="font-fredoka text-4xl md:text-5xl text-primary-pink mb-4">

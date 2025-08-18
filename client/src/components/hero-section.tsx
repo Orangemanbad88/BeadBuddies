@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Play, Images } from "lucide-react";
-import dogMascotImage from "@assets/IMG_20250818_144553_1755542835173.png";
+import DogMascotSVG from "./dog-mascot-svg";
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -11,25 +11,23 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24 confetti-bg mascot-container">
+    <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-r from-vibrant-orange/30 to-electric-blue/30 mascot-container">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="mb-8 animate-bounce-gentle">
-          <img
-            src={dogMascotImage}
-            alt="Cute cartoon dog mascot"
+          <DogMascotSVG
             className="w-32 h-32 md:w-40 md:h-40 mx-auto drop-shadow-xl"
             data-testid="img-hero-mascot"
           />
         </div>
         
-        <h1 className="font-fredoka text-5xl md:text-7xl lg:text-8xl text-primary-pink mb-6 drop-shadow-lg">
+        <h1 className="font-fredoka text-5xl md:text-7xl lg:text-8xl text-white mb-6 drop-shadow-lg">
           Welcome to<br />
           <span className="text-sunny-yellow">Tied Together!</span>
         </h1>
         
-        <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto font-semibold">
+        <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto font-semibold">
           Learn to make amazing bracelets with our fun tutorials! 
-          <span className="text-royal-blue"> Follow our friendly dog mascot</span> 
+          <span className="text-sunny-yellow"> Follow our friendly dog mascot</span> 
           and create beautiful friendship bracelets! 🎨✨
         </p>
         

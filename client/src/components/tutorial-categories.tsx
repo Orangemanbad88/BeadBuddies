@@ -7,7 +7,7 @@ export default function TutorialCategories() {
       title: "Beginner",
       description: "Perfect for first-time bracelet makers! Easy and fun projects.",
       icon: Star,
-      bgClass: "bg-gradient-to-br from-lime-green to-turquoise",
+      bgClass: "bg-gradient-to-br from-lime-green to-electric-blue",
       buttonTextClass: "text-lime-green",
       testId: "button-beginner"
     },
@@ -15,7 +15,7 @@ export default function TutorialCategories() {
       title: "Intermediate", 
       description: "Ready for more patterns? Try these colorful designs!",
       icon: Medal,
-      bgClass: "bg-gradient-to-br from-sunny-yellow to-primary-pink",
+      bgClass: "bg-gradient-to-br from-vibrant-orange to-primary-pink",
       buttonTextClass: "text-primary-pink",
       testId: "button-intermediate"
     },
@@ -23,8 +23,8 @@ export default function TutorialCategories() {
       title: "Advanced",
       description: "Master complex patterns and create amazing bracelets!",
       icon: Crown,
-      bgClass: "bg-gradient-to-br from-royal-blue to-deep-pink",
-      buttonTextClass: "text-royal-blue",
+      bgClass: "bg-gradient-to-br from-electric-blue to-deep-pink",
+      buttonTextClass: "text-electric-blue",
       testId: "button-advanced"
     }
   ];
