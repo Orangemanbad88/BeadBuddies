@@ -24,19 +24,21 @@ export class MemStorage implements IStorage {
     // Seed tutorials
     const tutorialData: InsertTutorial[] = [
       {
-        title: "Rainbow Rubber Band Bracelet",
-        description: "Learn to make a colorful rubber band bracelet in just 5 minutes!",
-        difficulty: "beginner",
-        duration: "5:32",
+        title: "Lightning Bolt Rubber Band Bracelet",
+        description: "Learn to make this amazing black and yellow zigzag pattern!",
+        difficulty: "intermediate",
+        duration: "8:45",
         videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
+        imageUrl: "/attached_assets/IMG-20250812-WA0007_1755544805320.jpg",
         steps: [
-          "Gather your colorful rubber bands",
-          "Place bands on your loom in a pattern",
-          "Hook and loop the bands carefully",
-          "Remove from loom and secure ends"
+          "Gather black and yellow rubber bands",
+          "Start with a black band as your base",
+          "Create the zigzag pattern by alternating colors",
+          "Hook each band carefully to form the chevron",
+          "Continue pattern until desired length",
+          "Secure with C-clip"
         ],
-        materials: ["Colorful rubber bands", "Loom or fingers", "C-clips", "Hook tool"]
+        materials: ["Black rubber bands", "Yellow rubber bands", "Loom", "C-clips", "Hook tool"]
       },
       {
         title: "Friendship Bracelet Basics",
@@ -54,19 +56,20 @@ export class MemStorage implements IStorage {
         materials: ["Embroidery thread (6 colors)", "Scissors", "Tape", "Clipboard or surface"]
       },
       {
-        title: "Beaded Dream Bracelet",
-        description: "Create stunning patterns with colorful beads and elastic cord!",
+        title: "Bright Green Chain Bracelet",
+        description: "Make this awesome neon green rubber band chain bracelet!",
         difficulty: "beginner",
-        duration: "6:42",
+        duration: "6:15",
         videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        imageUrl: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
+        imageUrl: "/attached_assets/IMG-20250812-WA0007_1755544805320.jpg",
         steps: [
-          "Measure elastic cord to fit wrist plus 2 inches",
-          "Plan your bead pattern on a flat surface",
-          "String beads carefully in your chosen pattern",
-          "Tie secure knots and trim excess cord"
+          "Get bright green rubber bands",
+          "Create your first chain link",
+          "Loop each new band through the previous one",
+          "Continue making chain links",
+          "Secure the end with a C-clip"
         ],
-        materials: ["Elastic cord", "Colorful beads", "Scissors", "Bead tray"]
+        materials: ["Bright green rubber bands", "C-clips", "Your fingers"]
       }
     ];
 
@@ -75,8 +78,24 @@ export class MemStorage implements IStorage {
       this.tutorials.set(id, { ...tutorial, id });
     });
 
-    // Seed gallery items
+    // Seed gallery items with real bracelet photos
     const galleryData: InsertGalleryItem[] = [
+      {
+        title: "Lightning Bolt Bracelet",
+        description: "Cool black and yellow zigzag pattern - perfect chevron style!",
+        imageUrl: "/attached_assets/IMG-20250812-WA0007_1755544805320.jpg",
+        creatorName: "Maya",
+        creatorAge: 10,
+        difficulty: "intermediate"
+      },
+      {
+        title: "Bright Green Chain",
+        description: "Awesome neon green rubber band bracelet with chain links",
+        imageUrl: "/attached_assets/IMG-20250812-WA0007_1755544805320.jpg",
+        creatorName: "Jake",
+        creatorAge: 8,
+        difficulty: "beginner"
+      },
       {
         title: "Rainbow Collection",
         description: "A beautiful set of colorful bracelets",
@@ -88,7 +107,7 @@ export class MemStorage implements IStorage {
       {
         title: "Beaded Beauty",
         description: "Intricate beaded pattern bracelet",
-        imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+        imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMajA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
         creatorName: "Lucas",
         creatorAge: 10,
         difficulty: "intermediate"
