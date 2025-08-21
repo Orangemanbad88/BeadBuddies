@@ -24,54 +24,6 @@ export class MemStorage implements IStorage {
     // Seed tutorials
     const tutorialData: InsertTutorial[] = [
       {
-        title: "Lightning Bolt Rubber Band Bracelet",
-        description: "Learn to make this amazing black and yellow zigzag pattern!",
-        difficulty: "intermediate",
-        duration: "8:45",
-        videoUrl: "https://www.youtube.com/embed/L0Op5VKW5J8",
-        imageUrl: "/attached_assets/IMG-20250812-WA0007_1755544805320.jpg",
-        steps: [
-          "Gather black and yellow rubber bands",
-          "Start with a black band as your base",
-          "Create the zigzag pattern by alternating colors",
-          "Hook each band carefully to form the chevron",
-          "Continue pattern until desired length",
-          "Secure with C-clip"
-        ],
-        materials: ["Black rubber bands", "Yellow rubber bands", "Loom", "C-clips", "Hook tool"]
-      },
-      {
-        title: "Friendship Bracelet Basics",
-        description: "Master the classic chevron pattern with colorful embroidery thread!",
-        difficulty: "intermediate",
-        duration: "8:15",
-        videoUrl: "https://www.youtube.com/embed/9ztPKmP9fJ8",
-        imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-        steps: [
-          "Cut 6 strands of embroidery thread, 24 inches each",
-          "Tie a knot at the top and tape down",
-          "Create forward knots in chevron pattern",
-          "Continue pattern until desired length"
-        ],
-        materials: ["Embroidery thread (6 colors)", "Scissors", "Tape", "Clipboard or surface"]
-      },
-      {
-        title: "Bright Green Chain Bracelet",
-        description: "Make this awesome neon green rubber band chain bracelet!",
-        difficulty: "beginner",
-        duration: "6:15",
-        videoUrl: "https://www.youtube.com/embed/BpO9QFlCFBY",
-        imageUrl: "/attached_assets/IMG-20250812-WA0007_1755544805320.jpg",
-        steps: [
-          "Get bright green rubber bands",
-          "Create your first chain link",
-          "Loop each new band through the previous one",
-          "Continue making chain links",
-          "Secure the end with a C-clip"
-        ],
-        materials: ["Bright green rubber bands", "C-clips", "Your fingers"]
-      },
-      {
         title: "Your Personal Bracelet Tutorial",
         description: "Watch this amazing custom bracelet tutorial made just for Tied Together!",
         difficulty: "intermediate",
