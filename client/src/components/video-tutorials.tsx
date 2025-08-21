@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Play, Plus } from "lucide-react";
+import { useState } from "react";
+import VideoModal from "./video-modal";
 import type { Tutorial } from "@shared/schema";
 
 export default function VideoTutorials() {
+  const [selectedVideo, setSelectedVideo] = useState<Tutorial | null>(null);
   const { data: tutorials = [], isLoading } = useQuery<Tutorial[]>({
     queryKey: ["/api/tutorials"],
   });
@@ -83,6 +86,7 @@ export default function VideoTutorials() {
                     data-testid={`button-play-${tutorial.id}`}
                     size="icon"
                     className="w-16 h-16 bg-white/90 rounded-full text-primary-pink hover:bg-white"
+                    onClick={() => setSelectedVideo(tutorial)}
                   >
                     <Play className="w-6 h-6 ml-1" />
                   </Button>
@@ -121,6 +125,15 @@ export default function VideoTutorials() {
           </Button>
         </div>
       </div>
+      
+      {selectedVideo && (
+        <VideoModal
+          isOpen={!!selectedVideo}
+          onClose={() => setSelectedVideo(null)}
+          videoUrl={selectedVideo.videoUrl}
+          title={selectedVideo.title}
+        />
+      )}
     </section>
   );
 }

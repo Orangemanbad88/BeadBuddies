@@ -28,7 +28,7 @@ export class MemStorage implements IStorage {
         description: "Learn to make this amazing black and yellow zigzag pattern!",
         difficulty: "intermediate",
         duration: "8:45",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoUrl: "https://www.youtube.com/embed/L0Op5VKW5J8",
         imageUrl: "/attached_assets/IMG-20250812-WA0007_1755544805320.jpg",
         steps: [
           "Gather black and yellow rubber bands",
@@ -45,7 +45,7 @@ export class MemStorage implements IStorage {
         description: "Master the classic chevron pattern with colorful embroidery thread!",
         difficulty: "intermediate",
         duration: "8:15",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoUrl: "https://www.youtube.com/embed/9ztPKmP9fJ8",
         imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
         steps: [
           "Cut 6 strands of embroidery thread, 24 inches each",
@@ -60,7 +60,7 @@ export class MemStorage implements IStorage {
         description: "Make this awesome neon green rubber band chain bracelet!",
         difficulty: "beginner",
         duration: "6:15",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoUrl: "https://www.youtube.com/embed/BpO9QFlCFBY",
         imageUrl: "/attached_assets/IMG-20250812-WA0007_1755544805320.jpg",
         steps: [
           "Get bright green rubber bands",
