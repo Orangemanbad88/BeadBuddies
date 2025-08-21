@@ -32,14 +32,26 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
         
         <div className="px-6 pb-6">
           <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-black">
-            <iframe
-              src={videoUrl}
-              title={title}
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              data-testid="iframe-video"
-            />
+            {videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be') ? (
+              <iframe
+                src={videoUrl}
+                title={title}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                data-testid="iframe-video"
+              />
+            ) : (
+              <video
+                controls
+                className="w-full h-full"
+                data-testid="video-player"
+                preload="metadata"
+              >
+                <source src={videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
           </div>
         </div>
       </DialogContent>

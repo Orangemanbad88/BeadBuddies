@@ -70,6 +70,21 @@ export class MemStorage implements IStorage {
           "Secure the end with a C-clip"
         ],
         materials: ["Bright green rubber bands", "C-clips", "Your fingers"]
+      },
+      {
+        title: "Your Personal Bracelet Tutorial",
+        description: "Watch this amazing custom bracelet tutorial made just for Tied Together!",
+        difficulty: "intermediate",
+        duration: "Custom Video",
+        videoUrl: "/video/VID-20250812-WA0008(1)_1755799105150.mp4",
+        imageUrl: "/attached_assets/IMG-20250820-WA0018_1755797609321.jpg",
+        steps: [
+          "Follow along with the video tutorial",
+          "Gather your materials as shown",
+          "Practice the techniques demonstrated",
+          "Create your own unique design"
+        ],
+        materials: ["Various colored bands", "Loom or fingers", "Creativity"]
       }
     ];
 

@@ -7,6 +7,42 @@ import path from "path";
 export async function registerRoutes(app: Express): Promise<Server> {
   // Serve attached assets
   app.use('/attached_assets', express.static(path.join(process.cwd(), 'attached_assets')));
+  
+  // Serve videos with proper streaming support
+  app.get("/video/:filename", (req, res) => {
+    const filename = req.params.filename;
+    const videoPath = path.join(process.cwd(), 'attached_assets', filename);
+    
+    const fs = require('fs');
+    
+    if (!fs.existsSync(videoPath)) {
+      return res.status(404).send('Video not found');
+    }
+    
+    const stat = fs.statSync(videoPath);
+    const fileSize = stat.size;
+    const range = req.headers.range;
+    
+    res.setHeader('Content-Type', 'video/mp4');
+    res.setHeader('Accept-Ranges', 'bytes');
+    
+    if (range) {
+      const parts = range.replace(/bytes=/, "").split("-");
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      const chunksize = (end - start) + 1;
+      const file = fs.createReadStream(videoPath, { start, end });
+      
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Content-Length': chunksize,
+      });
+      file.pipe(res);
+    } else {
+      res.writeHead(200, { 'Content-Length': fileSize });
+      fs.createReadStream(videoPath).pipe(res);
+    }
+  });
   // Get all tutorials
   app.get("/api/tutorials", async (req, res) => {
     try {
