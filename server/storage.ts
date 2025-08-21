@@ -85,6 +85,21 @@ export class MemStorage implements IStorage {
           "Create your own unique design"
         ],
         materials: ["Various colored bands", "Loom or fingers", "Creativity"]
+      },
+      {
+        title: "Advanced Bracelet Techniques",
+        description: "Learn advanced bracelet making techniques in this exclusive tutorial!",
+        difficulty: "advanced",
+        duration: "Custom Video",
+        videoUrl: "/video/VID-20250821-WA0009_1755806710744.mp4",
+        imageUrl: "/attached_assets/IMG-20250820-WA0017_1755797609328.jpg",
+        steps: [
+          "Master advanced bracelet patterns",
+          "Learn complex weaving techniques",
+          "Practice intricate color combinations",
+          "Create professional-level bracelets"
+        ],
+        materials: ["Premium rubber bands", "Advanced loom tools", "Pattern guides", "Patience"]
       }
     ];
 
