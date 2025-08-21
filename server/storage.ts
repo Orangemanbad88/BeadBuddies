@@ -159,6 +159,54 @@ export class MemStorage implements IStorage {
         creatorName: "Violet",
         creatorAge: 11,
         difficulty: "advanced"
+      },
+      {
+        title: "Pretty in Pink Segments",
+        description: "Elegant pink and white segmented bracelet design",
+        imageUrl: "/attached_assets/IMG-20250820-WA0022_1755797609252.jpg",
+        creatorName: "Rose",
+        creatorAge: 9,
+        difficulty: "intermediate"
+      },
+      {
+        title: "Fishtail Lightning",
+        description: "Advanced black and yellow fishtail pattern",
+        imageUrl: "/attached_assets/IMG-20250820-WA0023_1755797609289.jpg",
+        creatorName: "Storm",
+        creatorAge: 12,
+        difficulty: "advanced"
+      },
+      {
+        title: "Autumn Twist",
+        description: "Beautiful orange and cream braided bracelet",
+        imageUrl: "/attached_assets/IMG-20250820-WA0021_1755797609301.jpg",
+        creatorName: "Autumn",
+        creatorAge: 10,
+        difficulty: "intermediate"
+      },
+      {
+        title: "GREYS Letter Bracelet",
+        description: "Personalized bracelet with colorful letter beads",
+        imageUrl: "/attached_assets/IMG-20250820-WA0015_1755797609334.jpg",
+        creatorName: "Grey",
+        creatorAge: 11,
+        difficulty: "beginner"
+      },
+      {
+        title: "Pastel Dreams",
+        description: "Soft pastel beaded bracelet with letter charm",
+        imageUrl: "/attached_assets/IMG-20250820-WA0012_1755797609340.jpg",
+        creatorName: "Grace",
+        creatorAge: 8,
+        difficulty: "beginner"
+      },
+      {
+        title: "Purple Flower Power",
+        description: "Purple chain bracelet with adorable flower charm",
+        imageUrl: "/attached_assets/IMG-20250820-WA0009_1755797609354.jpg",
+        creatorName: "Daisy",
+        creatorAge: 9,
+        difficulty: "intermediate"
       }
     ];
 
