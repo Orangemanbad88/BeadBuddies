@@ -32,7 +32,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, title }: VideoMo
         
         <div className="px-6 pb-6">
           <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-black">
-            {videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be') ? (
+            {videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be') || videoUrl.includes('embed') ? (
               <iframe
                 src={videoUrl}
                 title={title}

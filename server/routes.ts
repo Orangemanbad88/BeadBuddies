@@ -10,37 +10,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Serve videos with proper streaming support
   app.get("/video/:filename", (req, res) => {
-    const filename = req.params.filename;
-    const videoPath = path.join(process.cwd(), 'attached_assets', filename);
-    
-    const fs = require('fs');
-    
-    if (!fs.existsSync(videoPath)) {
-      return res.status(404).send('Video not found');
-    }
-    
-    const stat = fs.statSync(videoPath);
-    const fileSize = stat.size;
-    const range = req.headers.range;
-    
-    res.setHeader('Content-Type', 'video/mp4');
-    res.setHeader('Accept-Ranges', 'bytes');
-    
-    if (range) {
-      const parts = range.replace(/bytes=/, "").split("-");
-      const start = parseInt(parts[0], 10);
-      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-      const chunksize = (end - start) + 1;
-      const file = fs.createReadStream(videoPath, { start, end });
+    try {
+      const filename = req.params.filename;
+      const videoPath = path.join(process.cwd(), 'attached_assets', filename);
       
-      res.writeHead(206, {
-        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
-        'Content-Length': chunksize,
-      });
-      file.pipe(res);
-    } else {
-      res.writeHead(200, { 'Content-Length': fileSize });
-      fs.createReadStream(videoPath).pipe(res);
+      const fs = require('fs');
+      
+      if (!fs.existsSync(videoPath)) {
+        console.log(`Video not found: ${videoPath}`);
+        return res.status(404).send('Video not found');
+      }
+      
+      const stat = fs.statSync(videoPath);
+      const fileSize = stat.size;
+      const range = req.headers.range;
+      
+      res.setHeader('Content-Type', 'video/mp4');
+      res.setHeader('Accept-Ranges', 'bytes');
+      res.setHeader('Cache-Control', 'no-cache');
+      
+      if (range) {
+        const parts = range.replace(/bytes=/, "").split("-");
+        const start = parseInt(parts[0], 10);
+        const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+        const chunksize = (end - start) + 1;
+        const file = fs.createReadStream(videoPath, { start, end });
+        
+        res.writeHead(206, {
+          'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+          'Content-Length': chunksize,
+        });
+        file.pipe(res);
+      } else {
+        res.writeHead(200, { 'Content-Length': fileSize });
+        fs.createReadStream(videoPath).pipe(res);
+      }
+    } catch (error) {
+      console.error('Video streaming error:', error);
+      res.status(500).send('Internal server error');
     }
   });
   // Get all tutorials

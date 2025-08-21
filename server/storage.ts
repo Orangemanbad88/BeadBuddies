@@ -76,7 +76,7 @@ export class MemStorage implements IStorage {
         description: "Watch this amazing custom bracelet tutorial made just for Tied Together!",
         difficulty: "intermediate",
         duration: "Custom Video",
-        videoUrl: "/video/VID-20250812-WA0008(1)_1755799105150.mp4",
+        videoUrl: "/attached_assets/VID-20250812-WA0008(1)_1755799105150.mp4",
         imageUrl: "/attached_assets/IMG-20250820-WA0018_1755797609321.jpg",
         steps: [
           "Follow along with the video tutorial",
@@ -91,7 +91,7 @@ export class MemStorage implements IStorage {
         description: "Learn advanced bracelet making techniques in this exclusive tutorial!",
         difficulty: "advanced",
         duration: "Custom Video",
-        videoUrl: "/video/VID-20250821-WA0009_1755806710744.mp4",
+        videoUrl: "/attached_assets/VID-20250821-WA0009_1755806710744.mp4",
         imageUrl: "/attached_assets/IMG-20250820-WA0017_1755797609328.jpg",
         steps: [
           "Master advanced bracelet patterns",
