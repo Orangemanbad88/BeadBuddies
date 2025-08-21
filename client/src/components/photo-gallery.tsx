@@ -79,8 +79,8 @@ export default function PhotoGallery() {
                 <h3 className="font-fredoka text-white text-lg" data-testid={`text-title-${item.id}`}>
                   {item.title}
                 </h3>
-                <p className="text-white/80 text-sm" data-testid={`text-creator-${item.id}`}>
-                  By {item.creatorName}{item.creatorAge ? `, age ${item.creatorAge}` : ''}
+                <p className="text-white/80 text-sm" data-testid={`text-description-${item.id}`}>
+                  {item.description}
                 </p>
               </div>
             </div>
