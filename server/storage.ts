@@ -97,34 +97,66 @@ export class MemStorage implements IStorage {
         difficulty: "beginner"
       },
       {
-        title: "Rainbow Collection",
-        description: "A beautiful set of colorful bracelets",
-        imageUrl: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
+        title: "Colorful Friendship Set",
+        description: "Amazing collection of different colored bracelets",
+        imageUrl: "/attached_assets/IMG-20250820-WA0009_1755797609354.jpg",
         creatorName: "Emma",
-        creatorAge: 8,
+        creatorAge: 9,
         difficulty: "beginner"
       },
       {
-        title: "Beaded Beauty",
-        description: "Intricate beaded pattern bracelet",
-        imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMajA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
-        creatorName: "Lucas",
+        title: "Sparkle & Shine",
+        description: "Beautiful beaded bracelet with sparkling details",
+        imageUrl: "/attached_assets/IMG-20250820-WA0011_1755797609347.jpg",
+        creatorName: "Zoe",
         creatorAge: 10,
         difficulty: "intermediate"
       },
       {
-        title: "Chevron Dreams",
-        description: "Perfect chevron pattern friendship bracelet",
-        imageUrl: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
-        creatorName: "Sophia",
+        title: "Rainbow Creation",
+        description: "Vibrant rainbow pattern bracelet",
+        imageUrl: "/attached_assets/IMG-20250820-WA0012_1755797609340.jpg",
+        creatorName: "Riley",
+        creatorAge: 8,
+        difficulty: "beginner"
+      },
+      {
+        title: "Advanced Pattern Mix",
+        description: "Complex multi-pattern design bracelet",
+        imageUrl: "/attached_assets/IMG-20250820-WA0015_1755797609334.jpg",
+        creatorName: "Alex",
+        creatorAge: 11,
+        difficulty: "advanced"
+      },
+      {
+        title: "Cool Blue Design",
+        description: "Stylish blue and white pattern bracelet",
+        imageUrl: "/attached_assets/IMG-20250820-WA0017_1755797609328.jpg",
+        creatorName: "Sam",
         creatorAge: 9,
         difficulty: "intermediate"
       },
       {
-        title: "Charm Magic",
-        description: "Bracelet with beautiful charms and decorations",
-        imageUrl: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=600",
-        creatorName: "Alex",
+        title: "Sunset Colors",
+        description: "Warm orange and pink sunset-inspired bracelet",
+        imageUrl: "/attached_assets/IMG-20250820-WA0018_1755797609321.jpg",
+        creatorName: "Luna",
+        creatorAge: 10,
+        difficulty: "intermediate"
+      },
+      {
+        title: "Nature Inspired",
+        description: "Green and brown earth-tone bracelet",
+        imageUrl: "/attached_assets/IMG-20250820-WA0019_1755797609314.jpg",
+        creatorName: "Forest",
+        creatorAge: 8,
+        difficulty: "beginner"
+      },
+      {
+        title: "Purple Power",
+        description: "Bold purple and silver combination bracelet",
+        imageUrl: "/attached_assets/IMG-20250820-WA0020_1755797609307.jpg",
+        creatorName: "Violet",
         creatorAge: 11,
         difficulty: "advanced"
       }
