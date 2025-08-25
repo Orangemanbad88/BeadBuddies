@@ -52,6 +52,21 @@ export class MemStorage implements IStorage {
           "Create professional-level bracelets"
         ],
         materials: ["Premium rubber bands", "Advanced loom tools", "Pattern guides", "Patience"]
+      },
+      {
+        title: "How to Make a String Beaded bracelet",
+        description: "Learn how to create beautiful string beaded bracelets step by step!",
+        difficulty: "beginner",
+        duration: "Custom Video",
+        videoUrl: "/attached_assets/VID-20250824-WA0005_1756145545435.mp4",
+        imageUrl: "/attached_assets/IMG-20250820-WA0018_1755797609321.jpg",
+        steps: [
+          "Gather your string and beads",
+          "Follow the video demonstration",
+          "Practice the beading technique",
+          "Tie off your finished bracelet"
+        ],
+        materials: ["String or cord", "Assorted beads", "Scissors", "Clear instructions"]
       }
     ];
 
