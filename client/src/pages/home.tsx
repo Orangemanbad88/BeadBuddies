@@ -1,6 +1,5 @@
 import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
-import TutorialCategories from "@/components/tutorial-categories";
 import VideoTutorials from "@/components/video-tutorials";
 import PhotoGallery from "@/components/photo-gallery";
 import FeaturedTutorials from "@/components/featured-tutorials";
@@ -14,7 +13,6 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-vibrant-orange to-electric-blue">
       <Navigation />
       <HeroSection />
-      <TutorialCategories />
       <VideoTutorials />
       <PhotoGallery />
       <FeaturedTutorials />
