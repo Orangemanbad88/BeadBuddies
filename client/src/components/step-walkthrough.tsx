@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { toggleStep, resetTutorial } from "@/lib/progress";
 import { useProgressState } from "@/lib/use-progress";
+import { accessoryIds } from "@/data/accessories";
 
 export const StepWalkthrough = ({
   tutorialId,
@@ -12,7 +13,7 @@ export const StepWalkthrough = ({
 }: {
   tutorialId: string;
   steps: string[];
-  onComplete: () => void;
+  onComplete: (award: string | null) => void;
 }) => {
   const [active, setActive] = useState(0);
   const state = useProgressState();
@@ -22,18 +23,13 @@ export const StepWalkthrough = ({
   const isDone = done.includes(active);
   const last = active === total - 1;
 
-  const next = () => {
+  const handleAdvance = () => {
+    const award = isDone ? null : toggleStep(tutorialId, active, total, accessoryIds);
     if (last) {
-      if (!isDone) toggleStep(tutorialId, active, total);
-      onComplete();
+      onComplete(award);
       return;
     }
     setActive((i) => Math.min(total - 1, i + 1));
-  };
-
-  const markAndNext = () => {
-    if (!isDone) toggleStep(tutorialId, active, total);
-    next();
   };
 
   return (
@@ -93,7 +89,7 @@ export const StepWalkthrough = ({
         </Button>
         <Button
           type="button"
-          onClick={markAndNext}
+          onClick={handleAdvance}
           data-testid="button-next-step"
           className={cn(
             "rounded-full h-12 px-6 font-bold text-base",

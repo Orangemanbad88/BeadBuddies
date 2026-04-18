@@ -15,6 +15,7 @@ const TutorialDetailPage = () => {
   const [, params] = useRoute("/tutorials/:id");
   const id = params?.id ?? "";
   const [justFinished, setJustFinished] = useState(false);
+  const [award, setAward] = useState<string | null>(null);
   const celebrationRef = useRef<HTMLDivElement>(null);
 
   const data = getTutorialById(id);
@@ -81,13 +82,16 @@ const TutorialDetailPage = () => {
           <StepWalkthrough
             tutorialId={data.id}
             steps={data.steps}
-            onComplete={() => setJustFinished(true)}
+            onComplete={(a) => {
+              setAward(a);
+              setJustFinished(true);
+            }}
           />
         </div>
 
         {justFinished ? (
           <div ref={celebrationRef} className="mt-8">
-            <Celebration title={data.title} />
+            <Celebration title={data.title} awardId={award} />
           </div>
         ) : null}
       </article>
