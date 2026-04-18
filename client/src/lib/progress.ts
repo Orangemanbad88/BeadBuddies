@@ -47,7 +47,9 @@ const empty: ProgressState = {
   character: emptyCharacter,
 };
 
-const read = (): ProgressState => {
+let cached: ProgressState | null = null;
+
+const loadFromStorage = (): ProgressState => {
   if (typeof window === "undefined") return empty;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -64,10 +66,21 @@ const read = (): ProgressState => {
   }
 };
 
+const read = (): ProgressState => {
+  if (cached !== null) return cached;
+  cached = loadFromStorage();
+  return cached;
+};
+
 const write = (next: ProgressState) => {
+  cached = next;
   if (typeof window === "undefined") return;
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
+};
+
+const invalidate = () => {
+  cached = null;
 };
 
 const ensureTutorial = (state: ProgressState, id: string): ProgressState => {
@@ -252,11 +265,15 @@ export const recordChallengeWin = (
 
 export const subscribe = (listener: () => void): (() => void) => {
   if (typeof window === "undefined") return () => {};
-  const handler = () => listener();
-  window.addEventListener(CHANGE_EVENT, handler);
-  window.addEventListener("storage", handler);
+  const localHandler = () => listener();
+  const crossTabHandler = () => {
+    invalidate();
+    listener();
+  };
+  window.addEventListener(CHANGE_EVENT, localHandler);
+  window.addEventListener("storage", crossTabHandler);
   return () => {
-    window.removeEventListener(CHANGE_EVENT, handler);
-    window.removeEventListener("storage", handler);
+    window.removeEventListener(CHANGE_EVENT, localHandler);
+    window.removeEventListener("storage", crossTabHandler);
   };
 };
