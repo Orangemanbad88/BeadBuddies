@@ -219,7 +219,7 @@ export const Dallas = ({
           ref={svgRef}
           width={size}
           height={size}
-          viewBox="0 0 200 220"
+          viewBox="0 0 200 230"
           xmlns="http://www.w3.org/2000/svg"
           role="img"
           aria-label="Dallas the dog"
@@ -234,28 +234,63 @@ export const Dallas = ({
           onClick={handleTap}
           tabIndex={interactive ? 0 : -1}
         >
-          <ellipse cx="100" cy="210" rx="70" ry="8" fill="hsl(var(--ink) / 0.1)" />
+          <ellipse cx="100" cy="223" rx="72" ry="5" fill="hsl(var(--ink) / 0.12)" />
 
           <g
             style={{
-              transformOrigin: "140px 160px",
-              transform: wag ? "rotate(-30deg)" : "rotate(-8deg)",
-              transition: "transform 180ms ease-out",
+              transformOrigin: "148px 160px",
+              transform: wag ? "rotate(-28deg)" : "rotate(-8deg)",
+              transition: "transform 200ms ease-out",
             }}
           >
-            <ellipse
-              cx="140"
-              cy="160"
-              rx="9"
-              ry="22"
-              fill="#E8AE7A"
+            <path
+              d="M148 160 Q176 140 182 108"
               stroke="#3B2A1E"
-              strokeWidth="2.5"
+              strokeWidth="17"
+              fill="none"
+              strokeLinecap="round"
             />
+            <path
+              d="M148 160 Q176 140 182 108"
+              stroke="#E8AE7A"
+              strokeWidth="12"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <circle cx="182" cy="108" r="7" fill="#F9E0C2" stroke="#3B2A1E" strokeWidth="2.5" />
           </g>
 
           <ellipse cx="100" cy="160" rx="52" ry="50" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="3" />
           <ellipse cx="100" cy="158" rx="34" ry="30" fill="#F9E0C2" />
+
+          <g>
+            <ellipse cx="56" cy="178" rx="12" ry="28" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="2.8" transform="rotate(8 56 178)" />
+            <ellipse cx="52" cy="205" rx="14" ry="9" fill="#F9E0C2" stroke="#3B2A1E" strokeWidth="2.5" />
+            <circle cx="46" cy="201" r="2" fill="#3B2A1E" />
+            <circle cx="52" cy="200" r="2" fill="#3B2A1E" />
+            <circle cx="58" cy="201" r="2" fill="#3B2A1E" />
+          </g>
+          <g>
+            <ellipse cx="144" cy="178" rx="12" ry="28" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="2.8" transform="rotate(-8 144 178)" />
+            <ellipse cx="148" cy="205" rx="14" ry="9" fill="#F9E0C2" stroke="#3B2A1E" strokeWidth="2.5" />
+            <circle cx="142" cy="201" r="2" fill="#3B2A1E" />
+            <circle cx="148" cy="200" r="2" fill="#3B2A1E" />
+            <circle cx="154" cy="201" r="2" fill="#3B2A1E" />
+          </g>
+
+          <g>
+            <ellipse cx="82" cy="214" rx="15" ry="9" fill="#F9E0C2" stroke="#3B2A1E" strokeWidth="2.5" />
+            <circle cx="75" cy="211" r="2" fill="#3B2A1E" />
+            <circle cx="82" cy="210" r="2" fill="#3B2A1E" />
+            <circle cx="89" cy="212" r="2" fill="#3B2A1E" />
+          </g>
+          <g>
+            <ellipse cx="118" cy="214" rx="15" ry="9" fill="#F9E0C2" stroke="#3B2A1E" strokeWidth="2.5" />
+            <circle cx="111" cy="211" r="2" fill="#3B2A1E" />
+            <circle cx="118" cy="210" r="2" fill="#3B2A1E" />
+            <circle cx="125" cy="212" r="2" fill="#3B2A1E" />
+          </g>
+
           <ellipse cx="100" cy="96" rx="46" ry="42" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="3" />
           <path d="M62 70 Q58 105 72 115 Q78 92 78 76 Z" fill="#BF7F4D" stroke="#3B2A1E" strokeWidth="3" strokeLinejoin="round" />
           <path d="M138 70 Q142 105 128 115 Q122 92 122 76 Z" fill="#BF7F4D" stroke="#3B2A1E" strokeWidth="3" strokeLinejoin="round" />
