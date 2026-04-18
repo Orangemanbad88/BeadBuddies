@@ -22,6 +22,8 @@ export type CharacterState = {
   unlockedAccessories: string[];
   challengeWins: number;
   highestChallengeLevel: number;
+  currentStreak: number;
+  bestStreak: number;
 };
 
 export type ProgressState = {
@@ -38,6 +40,8 @@ const emptyCharacter: CharacterState = {
   unlockedAccessories: [],
   challengeWins: 0,
   highestChallengeLevel: 0,
+  currentStreak: 0,
+  bestStreak: 0,
 };
 
 const empty: ProgressState = {
@@ -237,15 +241,31 @@ export const equipAccessory = (accessoryId: string | null) => {
   });
 };
 
+export type ChallengeAward = {
+  accessory: string | null;
+  bonusAccessory: string | null;
+  streak: number;
+  streakMilestone: boolean;
+};
+
 export const recordChallengeWin = (
   level: number,
   accessoryPool: string[],
-): string | null => {
+): ChallengeAward => {
   const state = read();
-  const awarded = pickNextUnlock(
-    state.character.unlockedAccessories,
-    accessoryPool,
-  );
+  const newStreak = state.character.currentStreak + 1;
+  const milestone = newStreak > 0 && newStreak % 3 === 0;
+  let unlocked = [...state.character.unlockedAccessories];
+
+  const accessory = pickNextUnlock(unlocked, accessoryPool);
+  if (accessory) unlocked = [...unlocked, accessory];
+
+  let bonusAccessory: string | null = null;
+  if (milestone) {
+    bonusAccessory = pickNextUnlock(unlocked, accessoryPool);
+    if (bonusAccessory) unlocked = [...unlocked, bonusAccessory];
+  }
+
   write({
     ...state,
     character: {
@@ -255,12 +275,27 @@ export const recordChallengeWin = (
         state.character.highestChallengeLevel,
         level,
       ),
-      unlockedAccessories: awarded
-        ? [...state.character.unlockedAccessories, awarded]
-        : state.character.unlockedAccessories,
+      currentStreak: newStreak,
+      bestStreak: Math.max(state.character.bestStreak, newStreak),
+      unlockedAccessories: unlocked,
     },
   });
-  return awarded;
+
+  return {
+    accessory,
+    bonusAccessory,
+    streak: newStreak,
+    streakMilestone: milestone,
+  };
+};
+
+export const resetStreak = () => {
+  const state = read();
+  if (state.character.currentStreak === 0) return;
+  write({
+    ...state,
+    character: { ...state.character, currentStreak: 0 },
+  });
 };
 
 export const subscribe = (listener: () => void): (() => void) => {

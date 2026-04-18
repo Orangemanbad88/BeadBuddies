@@ -1,6 +1,8 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useProgressState } from "@/lib/use-progress";
+
+type DallasMood = "happy" | "thinking" | "sleeping";
 
 type DallasProps = {
   size?: number;
@@ -8,10 +10,23 @@ type DallasProps = {
   idle?: boolean;
   interactive?: boolean;
   className?: string;
-  mood?: "happy" | "thinking" | "sleeping";
+  mood?: DallasMood;
   message?: ReactNode;
   onMessageDismiss?: () => void;
 };
+
+const tapPhrases = [
+  "Woof!",
+  "Hi there!",
+  "Pat pat pat!",
+  "You're doing great!",
+  "Wanna play Bead Lab?",
+  "I love your bracelets!",
+  "Bork!",
+  "That tickles!",
+  "Let's make stuff!",
+  "You're the best!",
+];
 
 const Accessory = ({ id }: { id: string | null }) => {
   if (!id) return null;
@@ -90,12 +105,6 @@ const Accessory = ({ id }: { id: string | null }) => {
   }
 };
 
-const eyeCloseMap = {
-  happy: false,
-  thinking: false,
-  sleeping: true,
-};
-
 export const Dallas = ({
   size = 200,
   accessoryOverride,
@@ -113,6 +122,10 @@ export const Dallas = ({
       : state.character.equippedAccessory;
   const [blink, setBlink] = useState(false);
   const [wag, setWag] = useState(false);
+  const [pupil, setPupil] = useState({ x: 0, y: 0 });
+  const [tilting, setTilting] = useState(false);
+  const [tapSpeech, setTapSpeech] = useState<string | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     if (!idle || mood === "sleeping") return;
@@ -132,102 +145,158 @@ export const Dallas = ({
     };
   }, [idle, mood]);
 
-  const eyesClosed = blink || eyeCloseMap[mood];
+  useEffect(() => {
+    if (!interactive) return;
+    let raf = 0;
+    let latestX = 0;
+    let latestY = 0;
+    const update = () => {
+      raf = 0;
+      const el = svgRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = latestX - cx;
+      const dy = latestY - cy;
+      const dist = Math.hypot(dx, dy);
+      if (dist === 0) {
+        setPupil({ x: 0, y: 0 });
+        return;
+      }
+      const magnitude = Math.min(1, dist / 360);
+      const max = 2.6;
+      setPupil({
+        x: (dx / dist) * magnitude * max,
+        y: (dy / dist) * magnitude * max,
+      });
+    };
+    const onMove = (e: PointerEvent) => {
+      latestX = e.clientX;
+      latestY = e.clientY;
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [interactive]);
+
+  const eyesClosed = blink || mood === "sleeping";
+  const activeMessage = message ?? tapSpeech;
+
+  const handleTap = () => {
+    if (!interactive || message) return;
+    setTilting(true);
+    setTapSpeech(tapPhrases[Math.floor(Math.random() * tapPhrases.length)]);
+    window.setTimeout(() => setTilting(false), 540);
+    window.setTimeout(() => setTapSpeech(null), 2400);
+  };
+
+  const dismissMessage = () => {
+    if (tapSpeech) setTapSpeech(null);
+    onMessageDismiss?.();
+  };
 
   return (
     <div className={cn("relative inline-block select-none", className)}>
-      {message ? (
+      {activeMessage ? (
         <button
           type="button"
-          onClick={onMessageDismiss}
+          onClick={dismissMessage}
           className="absolute -top-2 left-full ml-4 z-10 anim-pop max-w-[260px] text-left bg-white border-2 border-ink rounded-2xl rounded-bl-sm px-4 py-3 text-sm font-semibold text-ink shadow-[0_3px_0_hsl(var(--ink)/0.18)] hover:bg-cream-deep transition-colors"
           aria-label="Dismiss message"
         >
-          <span className="block leading-snug">{message}</span>
+          <span className="block leading-snug">{activeMessage}</span>
           <span className="text-[10px] uppercase tracking-wider text-ink-muted mt-1 block">
             tap to close
           </span>
         </button>
       ) : null}
-      <svg
-        width={size}
-        height={size}
-        viewBox="0 0 200 220"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="Dallas the dog"
-        className={cn(
-          idle && "anim-dallas-breathe",
-          interactive && "group cursor-pointer"
-        )}
-        onMouseEnter={() => interactive && setWag(true)}
-        onMouseLeave={() => interactive && setWag(false)}
-        onFocus={() => interactive && setWag(true)}
-        onBlur={() => interactive && setWag(false)}
-        tabIndex={interactive ? 0 : -1}
-      >
-        <ellipse cx="100" cy="210" rx="70" ry="8" fill="hsl(var(--ink) / 0.1)" />
-
-        <g
-          style={{
-            transformOrigin: "140px 160px",
-            transform: wag ? "rotate(-30deg)" : "rotate(-8deg)",
-            transition: "transform 180ms ease-out",
-          }}
+      <div className={cn(tilting && "anim-head-tilt")}>
+        <svg
+          ref={svgRef}
+          width={size}
+          height={size}
+          viewBox="0 0 200 220"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label="Dallas the dog"
+          className={cn(
+            idle && "anim-dallas-breathe",
+            interactive && "cursor-pointer"
+          )}
+          onMouseEnter={() => interactive && setWag(true)}
+          onMouseLeave={() => interactive && setWag(false)}
+          onFocus={() => interactive && setWag(true)}
+          onBlur={() => interactive && setWag(false)}
+          onClick={handleTap}
+          tabIndex={interactive ? 0 : -1}
         >
-          <ellipse
-            cx="140"
-            cy="160"
-            rx="9"
-            ry="22"
-            fill="#E8AE7A"
-            stroke="#3B2A1E"
-            strokeWidth="2.5"
-          />
-        </g>
+          <ellipse cx="100" cy="210" rx="70" ry="8" fill="hsl(var(--ink) / 0.1)" />
 
-        <ellipse cx="100" cy="160" rx="52" ry="50" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="3" />
-        <ellipse cx="100" cy="158" rx="34" ry="30" fill="#F9E0C2" />
-        <ellipse cx="100" cy="96" rx="46" ry="42" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="3" />
-        <path d="M62 70 Q58 105 72 115 Q78 92 78 76 Z" fill="#BF7F4D" stroke="#3B2A1E" strokeWidth="3" strokeLinejoin="round" />
-        <path d="M138 70 Q142 105 128 115 Q122 92 122 76 Z" fill="#BF7F4D" stroke="#3B2A1E" strokeWidth="3" strokeLinejoin="round" />
-
-        {eyesClosed ? (
-          <g stroke="#2A1B1B" strokeWidth="2.5" strokeLinecap="round" fill="none">
-            <path d="M80 95 Q86 97 92 95" />
-            <path d="M108 95 Q114 97 120 95" />
+          <g
+            style={{
+              transformOrigin: "140px 160px",
+              transform: wag ? "rotate(-30deg)" : "rotate(-8deg)",
+              transition: "transform 180ms ease-out",
+            }}
+          >
+            <ellipse
+              cx="140"
+              cy="160"
+              rx="9"
+              ry="22"
+              fill="#E8AE7A"
+              stroke="#3B2A1E"
+              strokeWidth="2.5"
+            />
           </g>
-        ) : (
-          <g>
-            <circle cx="86" cy="94" r="6" fill="#2A1B1B" />
-            <circle cx="114" cy="94" r="6" fill="#2A1B1B" />
-            <circle cx="88" cy="92" r="2" fill="#FFF" />
-            <circle cx="116" cy="92" r="2" fill="#FFF" />
-          </g>
-        )}
 
-        <ellipse cx="100" cy="108" rx="5" ry="4" fill="#2A1B1B" />
-        <path d="M100 112 Q100 120 93 120" stroke="#2A1B1B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-        <path d="M100 112 Q100 120 107 120" stroke="#2A1B1B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-        <circle cx="74" cy="104" r="6" fill="hsl(var(--coral) / 0.55)" />
-        <circle cx="126" cy="104" r="6" fill="hsl(var(--coral) / 0.55)" />
+          <ellipse cx="100" cy="160" rx="52" ry="50" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="3" />
+          <ellipse cx="100" cy="158" rx="34" ry="30" fill="#F9E0C2" />
+          <ellipse cx="100" cy="96" rx="46" ry="42" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="3" />
+          <path d="M62 70 Q58 105 72 115 Q78 92 78 76 Z" fill="#BF7F4D" stroke="#3B2A1E" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M138 70 Q142 105 128 115 Q122 92 122 76 Z" fill="#BF7F4D" stroke="#3B2A1E" strokeWidth="3" strokeLinejoin="round" />
 
-        {mood === "sleeping" ? (
-          <g fontFamily="var(--font-display)" fontSize="14" fill="hsl(var(--plum-deep))">
-            <text x="140" y="60">z</text>
-            <text x="150" y="48" fontSize="11">z</text>
-          </g>
-        ) : null}
+          {eyesClosed ? (
+            <g stroke="#2A1B1B" strokeWidth="2.5" strokeLinecap="round" fill="none">
+              <path d="M80 95 Q86 97 92 95" />
+              <path d="M108 95 Q114 97 120 95" />
+            </g>
+          ) : (
+            <g style={{ transform: `translate(${pupil.x}px, ${pupil.y}px)` }}>
+              <circle cx="86" cy="94" r="6" fill="#2A1B1B" />
+              <circle cx="114" cy="94" r="6" fill="#2A1B1B" />
+              <circle cx="88" cy="92" r="2" fill="#FFF" />
+              <circle cx="116" cy="92" r="2" fill="#FFF" />
+            </g>
+          )}
 
-        <path d="M62 130 Q100 142 138 130" stroke="hsl(var(--coral-deep))" strokeWidth="4" fill="none" strokeLinecap="round" />
-        <circle cx="74" cy="133" r="3.5" fill="hsl(var(--sun))" stroke="#3B2A1E" strokeWidth="1" />
-        <circle cx="88" cy="137" r="3.5" fill="hsl(var(--sage))" stroke="#3B2A1E" strokeWidth="1" />
-        <circle cx="100" cy="139" r="4" fill="hsl(var(--coral))" stroke="#3B2A1E" strokeWidth="1" />
-        <circle cx="112" cy="137" r="3.5" fill="hsl(var(--plum))" stroke="#3B2A1E" strokeWidth="1" />
-        <circle cx="126" cy="133" r="3.5" fill="hsl(var(--sun))" stroke="#3B2A1E" strokeWidth="1" />
+          <ellipse cx="100" cy="108" rx="5" ry="4" fill="#2A1B1B" />
+          <path d="M100 112 Q100 120 93 120" stroke="#2A1B1B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          <path d="M100 112 Q100 120 107 120" stroke="#2A1B1B" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+          <circle cx="74" cy="104" r="6" fill="hsl(var(--coral) / 0.55)" />
+          <circle cx="126" cy="104" r="6" fill="hsl(var(--coral) / 0.55)" />
 
-        <Accessory id={equipped ?? null} />
-      </svg>
+          {mood === "sleeping" ? (
+            <g fontFamily="var(--font-display)" fontSize="14" fill="hsl(var(--plum-deep))">
+              <text x="140" y="60">z</text>
+              <text x="150" y="48" fontSize="11">z</text>
+            </g>
+          ) : null}
+
+          <path d="M62 130 Q100 142 138 130" stroke="hsl(var(--coral-deep))" strokeWidth="4" fill="none" strokeLinecap="round" />
+          <circle cx="74" cy="133" r="3.5" fill="hsl(var(--sun))" stroke="#3B2A1E" strokeWidth="1" />
+          <circle cx="88" cy="137" r="3.5" fill="hsl(var(--sage))" stroke="#3B2A1E" strokeWidth="1" />
+          <circle cx="100" cy="139" r="4" fill="hsl(var(--coral))" stroke="#3B2A1E" strokeWidth="1" />
+          <circle cx="112" cy="137" r="3.5" fill="hsl(var(--plum))" stroke="#3B2A1E" strokeWidth="1" />
+          <circle cx="126" cy="133" r="3.5" fill="hsl(var(--sun))" stroke="#3B2A1E" strokeWidth="1" />
+
+          <Accessory id={equipped ?? null} />
+        </svg>
+      </div>
     </div>
   );
 };

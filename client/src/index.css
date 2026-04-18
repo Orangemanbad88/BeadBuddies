@@ -167,9 +167,22 @@
   50% { transform: translateY(-2px) scale(1.012); }
 }
 
+@keyframes head-tilt {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(-7deg); }
+  55% { transform: rotate(5deg); }
+  100% { transform: rotate(0); }
+}
+
 .anim-dallas-breathe {
   animation: dallas-breathe 3.4s ease-in-out infinite;
   transform-origin: center bottom;
+}
+
+.anim-head-tilt {
+  animation: head-tilt 540ms ease-in-out;
+  transform-origin: center center;
+  display: inline-block;
 }
 
 @keyframes pop-in {
