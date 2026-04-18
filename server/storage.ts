@@ -72,7 +72,7 @@ export class MemStorage implements IStorage {
 
     tutorialData.forEach(tutorial => {
       const id = randomUUID();
-      this.tutorials.set(id, { ...tutorial, id });
+      this.tutorials.set(id, { ...tutorial, id, videoUrl: tutorial.videoUrl ?? null });
     });
 
     // Seed gallery items with real bracelet photos
@@ -209,7 +209,12 @@ export class MemStorage implements IStorage {
 
     galleryData.forEach(item => {
       const id = randomUUID();
-      this.galleryItems.set(id, { ...item, id });
+      this.galleryItems.set(id, {
+        ...item,
+        id,
+        description: item.description ?? null,
+        creatorAge: item.creatorAge ?? null,
+      });
     });
   }
 
@@ -223,7 +228,11 @@ export class MemStorage implements IStorage {
 
   async createTutorial(insertTutorial: InsertTutorial): Promise<Tutorial> {
     const id = randomUUID();
-    const tutorial: Tutorial = { ...insertTutorial, id };
+    const tutorial: Tutorial = {
+      ...insertTutorial,
+      id,
+      videoUrl: insertTutorial.videoUrl ?? null,
+    };
     this.tutorials.set(id, tutorial);
     return tutorial;
   }
@@ -238,7 +247,12 @@ export class MemStorage implements IStorage {
 
   async createGalleryItem(insertItem: InsertGalleryItem): Promise<GalleryItem> {
     const id = randomUUID();
-    const item: GalleryItem = { ...insertItem, id };
+    const item: GalleryItem = {
+      ...insertItem,
+      id,
+      description: insertItem.description ?? null,
+      creatorAge: insertItem.creatorAge ?? null,
+    };
     this.galleryItems.set(id, item);
     return item;
   }
