@@ -264,11 +264,6 @@ export const Dallas = ({
           <ellipse cx="100" cy="158" rx="34" ry="30" fill="#F9E0C2" />
 
           <g>
-            <ellipse cx="96" cy="222" rx="10" ry="6" fill="#D89A67" stroke="#3B2A1E" strokeWidth="2" />
-            <ellipse cx="104" cy="222" rx="10" ry="6" fill="#D89A67" stroke="#3B2A1E" strokeWidth="2" />
-          </g>
-
-          <g>
             <ellipse cx="46" cy="184" rx="12" ry="30" fill="#E8AE7A" stroke="#3B2A1E" strokeWidth="2.8" transform="rotate(10 46 184)" />
             <ellipse cx="40" cy="214" rx="16" ry="10" fill="#F9E0C2" stroke="#3B2A1E" strokeWidth="2.5" />
             <circle cx="34" cy="210" r="2" fill="#3B2A1E" />
